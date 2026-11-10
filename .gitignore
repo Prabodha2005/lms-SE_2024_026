@@ -5,3 +5,10 @@
 # Java compiled files
 *.class
 out/
+
+# Operating system
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
