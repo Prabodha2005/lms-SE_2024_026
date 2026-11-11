@@ -19,9 +19,9 @@ public class Main {
         library.addBook(new Book("The Pragmatic Programmer", "Hunt & Thomas", "978-0135957059"));
 
         // Create and add members
-        library.addMember(new Member("M001", "Nadeesha Perera"));
+        library.addMember(new Member("M001", "Nadeesha Perera",3));
 
-        library.addMember(new Member("M002", "Kasun Silva"));
+        library.addMember(new Member("M002", "Kasun Silva",10));
 
         // Display books and members
         library.listBooks();
