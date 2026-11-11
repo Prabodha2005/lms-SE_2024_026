@@ -68,11 +68,12 @@ public class Member {
 
     @Override
     public String toString() {
-        return "Member{" +
+        return getClass().getSimpleName() + "{" +
                 "id='" + memberId + '\'' +
                 ", name='" + name + '\'' +
                 ", borrowedCount=" + borrowedCount +
                 ", maxBorrowLimit=" + maxBorrowLimit +
                 '}';
     }
+
 }
