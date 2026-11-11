@@ -3,6 +3,7 @@ package lms;
 import lms.model.Book;
 import lms.model.Member;
 import lms.service.Library;
+import lms.model.DVD;
 
 public class Main {
 
@@ -12,11 +13,13 @@ public class Main {
         Library library = new Library();
 
         // Create and add books
-        library.addBook(new Book("Clean Code", "Robert C. Martin", "978-0132350884"));
+        library.addItem(new Book("B001", "Clean Code", "Robert C. Martin"));
 
-        library.addBook(new Book("Effective Java", "Joshua Bloch", "978-0134685991"));
+        library.addItem(new Book("B002", "Effective Java", "Joshua Bloch"));
 
-        library.addBook(new Book("The Pragmatic Programmer", "Hunt & Thomas", "978-0135957059"));
+        library.addItem(new Book("B003", "The Pragmatic Programmer", "Hunt & Thomas"));
+
+        library.addItem(new DVD("D001", "Introduction to Algorithms", 120));
 
         // Create and add members
         library.addMember(new Member("M001", "Nadeesha Perera",3));
@@ -24,14 +27,14 @@ public class Main {
         library.addMember(new Member("M002", "Kasun Silva",10));
 
         // Display books and members
-        library.listBooks();
+        library.listItems();
 
         library.listMembers();
 
         // Test invalid book
         try {
             Book invalidBook = new Book("", "Nobody", "000-0000000000");
-            library.addBook(invalidBook);
+            library.addItem(invalidBook);
         } catch (IllegalArgumentException e) {
             System.out.println("Rejected invalid book: " + e.getMessage());
         }
