@@ -1,17 +1,17 @@
-
 package lms.model;
 
 public class Member {
 
-    // Private fields
     private String memberId;
     private String name;
     private int borrowedCount;
+    private int maxBorrowLimit;
 
     // Constructor
-    public Member(String memberId, String name) {
+    public Member(String memberId, String name, int maxBorrowLimit) {
         setMemberId(memberId);
         setName(name);
+        setMaxBorrowLimit(maxBorrowLimit);
         this.borrowedCount = 0;
     }
 
@@ -26,6 +26,10 @@ public class Member {
 
     public int getBorrowedCount() {
         return borrowedCount;
+    }
+
+    public int getMaxBorrowLimit() {
+        return maxBorrowLimit;
     }
 
     // Setters
@@ -50,18 +54,26 @@ public class Member {
         this.borrowedCount = borrowedCount;
     }
 
+    public void setMaxBorrowLimit(int maxBorrowLimit) {
+        if (maxBorrowLimit <= 0) {
+            throw new IllegalArgumentException("Borrow limit must be positive");
+        }
+        this.maxBorrowLimit = maxBorrowLimit;
+    }
+
     // Increment borrowed count
     public void incrementBorrowedCount() {
         setBorrowedCount(this.borrowedCount + 1);
     }
 
-    // toString method
     @Override
     public String toString() {
-        return "Member{" +
+        return getClass().getSimpleName() + "{" +
                 "id='" + memberId + '\'' +
                 ", name='" + name + '\'' +
                 ", borrowedCount=" + borrowedCount +
+                ", maxBorrowLimit=" + maxBorrowLimit +
                 '}';
     }
+
 }
