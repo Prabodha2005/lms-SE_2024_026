@@ -10,6 +10,7 @@ import lms.model.Reservable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import lms.exception.ItemNotAvailableException;
 
 public class Library {
 
@@ -84,7 +85,8 @@ public class Library {
     }
 
     // Lend an item
-    public void lend(Loanable thing, Member member) {
+    public void lend(Loanable thing, Member member)
+            throws ItemNotAvailableException {
         thing.loan(member);
     }
 

@@ -1,5 +1,6 @@
 package lms;
 
+import lms.exception.ItemNotAvailableException;
 import lms.model.Book;
 import lms.model.DVD;
 import lms.model.Magazine;
@@ -40,14 +41,19 @@ public class Main {
         // Lending tests
         System.out.println("\n--- Loans ---");
 
-        library.lend(book, student);
+        try {
+            library.lend(book, student);
 
-        // Try lending the same book again
-        library.lend(book, staff);
+            // Try lending the same book again
+            library.lend(book, staff);
 
-        // Lend DVD and Magazine to staff
-        library.lend(dvd, staff);
-        library.lend(magazine, staff);
+            // Lend DVD and Magazine to staff
+            library.lend(dvd, staff);
+            library.lend(magazine, staff);
+
+        } catch (ItemNotAvailableException e) {
+            System.out.println("Cannot lend item: " + e.getMessage());
+        }
 
         // Reservation tests
         System.out.println("\n--- Reservations ---");
@@ -55,6 +61,7 @@ public class Main {
         library.reserveIfPossible(book, staff);
         library.reserveIfPossible(dvd, staff);
 
+        // Display members ranked by activity
         library.printMembersByActivity();
     }
 }
