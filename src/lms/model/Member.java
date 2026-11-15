@@ -66,6 +66,13 @@ public class Member implements Comparable<Member> {
         setBorrowedCount(this.borrowedCount + 1);
     }
 
+    // Decrement borrowed count
+    public void decrementBorrowedCount() {
+        if (this.borrowedCount > 0) {
+            setBorrowedCount(this.borrowedCount - 1);
+        }
+    }
+
     @Override
     public int compareTo(Member other) {
         return Integer.compare(
