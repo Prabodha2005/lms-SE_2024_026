@@ -1,6 +1,6 @@
 package lms.model;
 
-public class Member {
+public class Member implements Comparable<Member> {
 
     private String memberId;
     private String name;
@@ -64,6 +64,14 @@ public class Member {
     // Increment borrowed count
     public void incrementBorrowedCount() {
         setBorrowedCount(this.borrowedCount + 1);
+    }
+
+    @Override
+    public int compareTo(Member other) {
+        return Integer.compare(
+                other.borrowedCount,
+                this.borrowedCount
+        );
     }
 
     @Override

@@ -3,9 +3,12 @@ package lms.service;
 import lms.model.Book;
 import lms.model.DVD;
 import lms.model.LibraryItem;
+import lms.model.Loanable;
 import lms.model.Member;
+import lms.model.Reservable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Library {
@@ -54,9 +57,11 @@ public class Library {
 
     // Calculate late fees
     public void printAllLateFees(int daysLate) {
+        System.out.println("--- Late fees if " + daysLate + " day(s) late ---");
+
         for (LibraryItem item : items) {
             System.out.println(
-                    item.getTitle() + " late fee: " +
+                    item.getTitle() + ": " +
                             item.calculateLateFee(daysLate)
             );
         }
@@ -74,6 +79,38 @@ public class Library {
             System.out.println(
                     item.getTitle() +
                             " cannot be streamed - it isn't a DVD."
+            );
+        }
+    }
+
+    // Lend an item
+    public void lend(Loanable thing, Member member) {
+        thing.loan(member);
+    }
+
+    // Reserve an item if possible
+    public void reserveIfPossible(LibraryItem item, Member member) {
+
+        if (item instanceof Reservable r) {
+            r.reserve(member);
+        } else {
+            System.out.println(item.getTitle() + " cannot be reserved.");
+        }
+    }
+
+    // Print members ranked by borrowing activity
+    public void printMembersByActivity() {
+
+        List<Member> sortedMembers = new ArrayList<>(members);
+
+        Collections.sort(sortedMembers);
+
+        System.out.println("--- Members ranked by activity ---");
+
+        for (Member member : sortedMembers) {
+            System.out.println(
+                    member.getName() + " (" +
+                            member.getBorrowedCount() + " borrowed)"
             );
         }
     }

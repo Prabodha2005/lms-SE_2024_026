@@ -2,61 +2,59 @@ package lms;
 
 import lms.model.Book;
 import lms.model.DVD;
+import lms.model.Magazine;
 import lms.model.Student;
 import lms.model.Staff;
 import lms.service.Library;
 
 public class Main {
-
     public static void main(String[] args) {
 
-        // Create Library object
+        // Create Library
         Library library = new Library();
 
-        // Create Book objects
-        Book b1 = new Book("B001", "Clean Code", "Robert C. Martin");
-        Book b2 = new Book("B002", "Effective Java", "Joshua Bloch");
+        // Create library items
+        Book book = new Book("B001", "Clean Code", "Robert C. Martin");
 
-        // Create DVD object
-        DVD d1 = new DVD("D001", "Introduction to Algorithms", 120);
+        DVD dvd = new DVD("D001", "Introduction to Algorithms", 120);
 
-        // Add items to the library (Method Overloading)
-        library.addItem(b1);
-        library.addItem(b2);
-        library.addItem(d1);
+        Magazine magazine = new Magazine("M001", "Software Weekly", 101);
 
-        // Create Student and Staff objects
-        Student s1 = new Student("M001", "Nadeesha Perera");
-        Staff st1 = new Staff("M002", "Kasun Silva");
+        // Add items
+        library.addItem(book);
+        library.addItem(dvd);
+        library.addItem(magazine);
 
-        // Add members to the library
-        library.addMember(s1);
-        library.addMember(st1);
+        // Create members
+        Student student = new Student("S001", "Nadeesha Perera");
 
-        // Display all library items
-        library.listItems();
+        Staff staff = new Staff("ST001", "Mr. Kasun Silva");
 
-        // Display all members
-        library.listMembers();
+        // Add members
+        library.addMember(student);
+        library.addMember(staff);
 
-        // Calculate late fees for 3 days
-        System.out.println("\n--- Late Fee Calculation ---");
+        // Display late fees
         library.printAllLateFees(3);
 
-        // Test DVD streaming
-        System.out.println("\n--- Streaming Test ---");
-        library.streamIfPossible(d1);
-        library.streamIfPossible(b1);
+        // Lending tests
+        System.out.println("\n--- Loans ---");
 
-        // Test exception handling
-        System.out.println("\n--- Exception Handling Test ---");
+        library.lend(book, student);
 
-        try {
-            Book invalidBook = new Book("", "Nobody", "Unknown");
-            library.addItem(invalidBook);
+        // Try lending the same book again
+        library.lend(book, staff);
 
-        } catch (IllegalArgumentException e) {
-            System.out.println("Rejected invalid book: " + e.getMessage());
-        }
+        // Lend DVD and Magazine to staff
+        library.lend(dvd, staff);
+        library.lend(magazine, staff);
+
+        // Reservation tests
+        System.out.println("\n--- Reservations ---");
+
+        library.reserveIfPossible(book, staff);
+        library.reserveIfPossible(dvd, staff);
+
+        library.printMembersByActivity();
     }
 }
